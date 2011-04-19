@@ -1,0 +1,62 @@
+# use glob syntax.
+syntax: glob
+*.ser
+*.class
+*~
+*.bak
+*.off
+*.old
+.DS_Store
+*.db
+
+# logs
+derby.log
+
+smack_3_1_0
+
+# eclipse conf file
+.settings
+.classpath
+.project
+.manager
+.externalToolBuilders
+
+# ensime/emacs conf files
+.ensime
+.scala_dependencies
+
+# building
+target
+null
+tmp*
+dist
+test-output
+*.db
+*.db.*
+
+# sbt
+target
+lib_managed
+src_managed
+project/boot
+
+# vim files
+*.sw*
+
+# other scm
+.svn
+.CVS
+.hg*
+
+# switch to regexp syntax.
+#  syntax: regexp
+#  ^\.pc/
+
+# IntelliJ
+*.iml
+*.ipr
+*.iws
+.idea
+
+# Pax Runner (for easy OSGi launching)
+runner
