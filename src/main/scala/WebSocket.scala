@@ -17,6 +17,7 @@ object WebSocket {
     if( req.startsWith("GET") ) readFile(req.split(" ")(1)) else "400 Bad Request"
 
   def main(args: Array[String]) {
+    println("WebServer running on port 8081")
     val client = new ServerSocket(8081).accept()
     val in = new BufferedReader(new InputStreamReader(client.getInputStream()))
     val output = new DataOutputStream(client.getOutputStream())
