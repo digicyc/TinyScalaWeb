@@ -2,11 +2,11 @@ import java.io._
 import java.net._
 
 object WebSocket {
-  val builtHeader = 
+  private val builtHeader = 
     "HTTP/1.1 200 OK\r\nAccept_Ranges: bytes\r\nConnection: close\r\n" +
     "Server: TinyScalaHTTPServ v0.1\r\nContent-type: text/html\r\n\r\n"
 
-  def parseFile(file: String) = {
+  private def parseFile(file: String) = {
     val MatchFile = """GET (\/.*) HTTP.*""".r
     file match {
       case MatchFile(readFile) if readFile.endsWith("/") => "index.html"
