@@ -6,15 +6,15 @@ object WebSocket {
     "HTTP/1.1 200 OK\r\nAccept_Ranges: bytes\r\nConnection: close\r\n" +
     "Server: TinyScalaHTTPServ v0.1\r\nContent-type: text/html\r\n\r\n"
 
-  private def readFile(file: String): String = {
-    val servFile = if( file.startsWith("/") ) file.replace("/","") else file
-    try { 
-      scala.io.Source.fromFile(servFile).getLines.mkString 
-    } catch { case _ => "404 NOT FOUND" }
+  def parseFile(file: String) = {
+    println(file)
+    val MatchFile = """GET (\/.*) HTTP.*""".r
+    file match {
+      case MatchFile(readFile) if readFile.endsWith("/") => "index.html"
+      case MatchFile(readFile) if !(readFile contains "..") => readFile.replace("/","")
+      case _ => throw new Exception("File not found!")
+    }
   }
-
-  def htmlProcess(req: String) =
-    if( req.startsWith("GET") ) readFile(req.split(" ")(1)) else "400 Bad Request"
 
   def main(args: Array[String]) {
     println("WebServer running on port 8081")
@@ -22,8 +22,14 @@ object WebSocket {
     val in = new BufferedReader(new InputStreamReader(client.getInputStream()))
     val output = new DataOutputStream(client.getOutputStream())
     val line = in.readLine()
+
+    val fileRead = 
+      try {
+        scala.io.Source.fromFile(parseFile(line)).getLines
+      } catch { case _ => List("404 File Not Found!") }
     output.writeBytes(builtHeader)
-    output.writeBytes(htmlProcess(line))
+    fileRead.foreach{ output.writeBytes }
     output.close()
+    client.close()
   }
 }
