@@ -7,7 +7,6 @@ object WebSocket {
     "Server: TinyScalaHTTPServ v0.1\r\nContent-type: text/html\r\n\r\n"
 
   def parseFile(file: String) = {
-    println(file)
     val MatchFile = """GET (\/.*) HTTP.*""".r
     file match {
       case MatchFile(readFile) if readFile.endsWith("/") => "index.html"
