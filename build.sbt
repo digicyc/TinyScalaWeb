@@ -1,11 +1,17 @@
+name := "TinyScalaWeb"
 
-lazy val commonSettings = Seq(
-  version := "0.1",
-  scalaVersion := "2.11.4"
+version := "1.1"
+
+scalaVersion := "2.12.8"
+
+libraryDependencies ++= Seq(
+    "org.scalatest" %% "scalatest" % "3.0.5" % "test"
 )
 
-lazy val root = (project in file(".")).
-  settings(commonSettings: _*).
-  settings(
-    name := "TinyWebServer"
-  )
+scalacOptions ++= Seq(
+    "-deprecation",
+    "-unchecked",
+    "-explaintypes",
+    "-Ywarn-dead-code",
+    "-Xfatal-warnings"
+)
